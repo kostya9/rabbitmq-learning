@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using EasyNetQ;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using Testcontainers.RabbitMq;
 
@@ -109,6 +110,21 @@ model.BasicPublish("my_topic_exchange", "topic1", null, Encoding.UTF8.GetBytes("
 // Implement the method in such a way, that it handles creation of the exchange and queue, and binding them together.
 // The method should publish the message to a separate exchange for each type of message(T).
 // Each type of message(T) should be routed to a separate queue.
+
+void PublishMessage<T>(IModel model, T message)
+{
+	var typeName = typeof(T).Name;
+	var exchangeName = $"my_exchange_{typeName}";
+	var queueName = $"my_queue_{typeName}";
+	model.ExchangeDeclare(exchangeName, ExchangeType.Direct);
+	model.QueueDeclare(queueName, false, false, false, null);
+	model.QueueBind(queueName, exchangeName, "");
+	model.BasicPublish(exchangeName, "", null, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message)));
+}
+
+PublishMessage(model, new { Message = "Hello World" });
+PublishMessage(model, "hehe");
+PublishMessage(model, 123);
 
 #endregion
 
