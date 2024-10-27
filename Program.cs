@@ -21,6 +21,7 @@ using var model = connection.CreateModel();
 // So do NOT close the app until you are finished looking at the RabbitMQ management interface (http://localhost:15672/)
 // For these excersizes we will use a lower-level API of RabbitMQ, which is the .NET client library
 // Even if you usually use EasyNetQ, all of the concepts that we will cover are still used in that library under the hood
+// Use the `model` variable to interact with RabbitMQ
 
 #region Excercize 1. Queues and Exchanges
 // RabbitMQ introduces the concept of exchanges and queues.
