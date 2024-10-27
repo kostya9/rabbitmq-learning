@@ -28,7 +28,7 @@ using var model = connection.CreateModel();
 // It is important to note that RabbitMQ introduces only one way to publish messages - to an exchange.
 // You can not publish a message to a queue directly, an exchange is always involved.
 
-// 1.1. TODO: Create an exchange named "my_exchange" of type "direct"
+// 1.1. TODO: Create (in RabbitMQ terms, declare) an exchange named "my_exchange" of type "direct"
 //
 // Take a look at the RabbitMQ management interface to see if the exchange was created
 // HINT: go to http://localhost:15672/ and login with guest/guest
@@ -41,7 +41,7 @@ using var model = connection.CreateModel();
 // Take a look at the queues tab in the Rabbit UI, do you see any queues with messages?
 
 // When we use messaging systems, we want messages to be delivered to a queue, so that we can handle it.
-// 1.3. TODO: Create a queue named "my_queue"
+// 1.3. TODO: Create (in RabbitMQ terms, declare) a queue named "my_queue"
 //
 // Take a look at the queues tab in the Rabbit UI, do you see the queue?
 
