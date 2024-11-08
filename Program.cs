@@ -66,7 +66,7 @@ using var model = connection.CreateModel();
 // 1.6. TODO: Publish a message with the text "Hello World" to the exchange "" (empty string) and routing key "my_queue"
 //
 // Take a look at the queue page in the Rabbit UI, do you see the message in the queue?
-// Take a look at the my_exchange statistics in the Rabbit UI, do you see any messages passed through it?
+// Take a look at the default exchange statistics in the Rabbit UI, do you see any messages passed through it?
 
 // 1.7. RabbitMQ has various types of exchanges and they route messages to queus in different ways.
 // Let's create an exchange my_fanout_exchange of type "fanout"
