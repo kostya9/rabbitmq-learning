@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using EasyNetQ;
 using RabbitMQ.Client;
 using Testcontainers.RabbitMq;
@@ -47,7 +47,7 @@ using var model = connection.CreateModel();
 
 
 // Now, we want to bind the exchange to the queue, so that messages are delivered to the queue
-// 1.4. TODO: Bind the queue "my_queue" to the exchange "my_exchange" with the routing key "#"
+// 1.4. TODO: Bind the queue "my_queue" to the exchange "my_exchange" with the routing key ""
 //
 // Take a look at the bindings tab in the queue and exchange page in the Rabbit UI, do you see the binding?
 
@@ -58,7 +58,7 @@ using var model = connection.CreateModel();
 // Take a look at the queue page in the Rabbit UI, do you see the message in the queue?
 // Try pressing the read all messages button, can you find the hello world message?
 
-// We now went to the whole flow of the publishing a message to a queue. 
+// We now went to the whole flow of the publishing a message to a queue.
 // You might wonder, how do some libraries implement direct queue sending if RabbitMQ does not support that?
 // Fortunately, RabbitMQ has a feature called default exchange, which is a exchange with an empty name.
 // Whenever you publish a message to that exchange with a routing key that matches the queue name, the message is delivered to the queue.
@@ -86,7 +86,7 @@ using var model = connection.CreateModel();
 // Take a look at the queues and exchange in the Rabbit UI, where was the message delivered?
 
 // 1.9. Final excersize
-// TODO: Implement a method with the following signature: 
+// TODO: Implement a method with the following signature:
 // void PublishMessage<T>(IModel model, T message);
 //
 // Implement the method in such a way, that it handles creation of the exchange and queue, and binding them together.
@@ -98,7 +98,7 @@ using var model = connection.CreateModel();
 #region Excercize 2. Consumers
 // Now that we have a message in the queue, we want to do something with it.
 // There are multiple ways to consume messages from a queue, but we will use the most simple method - just getting the message from the queue.
-// Task 2.1 Use BasicGet to get the message from the queue (set autoAck to false). 
+// Task 2.1 Use BasicGet to get the message from the queue (set autoAck to false).
 // Create and exchange my_consuming_exchange and bind it to a queue my_consuming_queue
 // Publish a message to the exchange
 // Get the message from the queue
@@ -109,7 +109,7 @@ using var model = connection.CreateModel();
 // Take a look at the queue page in the Rabbit UI, do you see the message removed from the queue?
 // Try setting the autoAck parameter to true, does something change?
 
-// An interesting thing you will see in the statistics tab is that the message is now shows as 'unacked'. 
+// An interesting thing you will see in the statistics tab is that the message is now shows as 'unacked'.
 // This means that if your app shuts down, the message will be redelivered to the queue (basically, guaranteeing that it will be handled if the app restarts from time to time).
 // And the total number of messages in the queue did not decrease. That changed when we set autoAck to true.
 // Usually, we send an acknowledge signal when we handled the message, to indicate that RabbitMQ can now delete it.
